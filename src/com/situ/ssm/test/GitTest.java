@@ -2,7 +2,7 @@ package com.situ.ssm.test;
 
 import org.junit.Test;
 
-public class GitTest10000000 {
+public class GitTest {
 	@Test
 	public void test1(){
 		System.out.println("GitTest.test1()");
