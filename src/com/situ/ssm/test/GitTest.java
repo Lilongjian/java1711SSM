@@ -11,5 +11,12 @@ public class GitTest {
 	public void test2(){
 		System.out.println("GitTest.test1()");
 	}
-
+	@Test
+	public void test3(){
+		System.out.println("GitTest.test1()");
+	}
+	@Test
+	public void test4(){
+		System.out.println("GitTest.test1()");
+	}
 }
