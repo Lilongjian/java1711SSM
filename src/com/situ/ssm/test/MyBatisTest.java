@@ -13,7 +13,7 @@ import com.situ.ssm.entity.Student;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class MyBatisTest {
+public class MyBatisTest000000 {
 	@Autowired
 	private StudentDao studentDao;
 	
