@@ -35,4 +35,8 @@ public class GitTest {
 	public void test8(){
 		System.out.println("分支创建四");
 	}
+	@Test
+	public void test9(){
+		System.out.println("分支创建五");
+	}
 }
