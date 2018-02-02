@@ -19,4 +19,8 @@ public class GitTest {
 	public void test4(){
 		System.out.println("GitTest.test1()");
 	}
+	@Test
+	public void test5(){
+		System.out.println("分支的创建");
+	}
 }
