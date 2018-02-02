@@ -33,5 +33,14 @@ public class MyBatisTest {
 			System.out.println(student);
 		}
 	}
+	@Test
+	public void test3(){
+		String column="id";
+		List<Student> list = studentDao.findAll(column);
+		for (Student student : list) {
+			System.out.println(student);
+			System.out.println("一条狗");
+		}
+	}
 
 }
