@@ -14,7 +14,7 @@
 <script src="/Java1711Web/lib/jquery/jquery-1.11.1.js" type="text/javascript"></script>
  <script type="text/javascript">
  function refreshCode(){
-	$("#codeImg").attr("src","/Java1711Web/checkImg?" + Math.random()); 
+	$("#codeImg").attr("src","/Java1711SSM/checkImg?" + Math.random()); 
  }
  </script>
  
@@ -100,7 +100,7 @@
 			margin-left:100px ;
 			}
 			body{
-		   	background-color: #AAAAAA;
+		   	background-color: #jfoe00;
 		   }
 			
 		</style>
@@ -110,7 +110,7 @@
       <div class="qq">
       <div class="ww">
       <div class="ee"><b>学生管理系统</b></div>
-      <form action="${pageContext.request.contextPath}/login/signIn.action" method="post" id="location">
+      <form action="${pageContext.request.contextPath}/login/signIn" method="post" id="location">
       <div class="rr">
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">用户名：</label>
@@ -120,7 +120,8 @@
 	    <label for="exampleInputPassword1">&nbsp;&nbsp;&nbsp;密码：</label>
 	    <input type="password" name="password"><br/>
 	  </div>
-	 <%--  验证码：<input type="text" name="checkCode">&nbsp;&nbsp;<img src="${ctx}/checkImg" id="codeImg" onclick="refreshCode()"><br> --%>
+	  验证码：<input type="text" name="checkCode">&nbsp;&nbsp;<img src="${ctx}/checkImg" id="codeImg" onclick="refreshCode()"><br>
+	                              
 	  <br>
 	  <button type="submit" class="btn btn-default" class="uu" >登录</button>
 	  </div>

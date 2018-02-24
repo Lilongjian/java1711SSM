@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.situ.ssm.dao.BanjiDao">
+
+<sql id="banjiColums">
+		id,name
+	</sql>
+
+<resultMap type="Banji" id="banjiMap">
+<id property="id" column="banjiId"/>
+<result property="name" column="banjiName"/>
+<collection property="list" ofType="Student">
+<id property="id" column="id"/>
+<result property="name" column="name"/>
+<result property="age" column="age"/>
+<result property="gender" column="gender"/>
+</collection>
+</resultMap>
+
+<select id="findBanjiInfoById" parameterType="int" resultMap="banjiMap">
+		SELECT b.id AS banjiId,b.NAME AS banjiName,s.id,s.name,s.age,s.gender 
+		FROM banji AS b 
+		INNER JOIN student AS s ON b.id=s.banji_id 
+		WHERE b.id=#{id};
+</select>
+
+<!-- 根据班级名称，查询这个班级下面的所有学生 -->
+<select id="findStudentByName" parameterType="String" resultType="Student">
+       SELECT s.id,s.name,s.age,s.gender,s.address 
+       FROM student AS s 
+       INNER JOIN banji AS b ON s.banji_id=b.id 
+       WHERE b.NAME=#{name};
+</select>
+
+<resultMap type="Banji" id="classCourseMap">
+<id property="id" column="id"/>
+<result property="name" column="name"/>
+<collection property="courseList" ofType="Course">
+<id property="id" column="courseId"/>
+<result property="name" column="courseName"/>
+<result property="credit" column="credit"/>
+</collection>
+</resultMap>
+
+<!-- 查询指定班级学习的所有课程 -->
+<select id="findClassCourseInfoByName" parameterType="String" resultMap="classCourseMap">
+		SELECT b.id,b.name,c.id as courseId,c.name as courseName,c.credit 
+		FROM banji AS b 
+		INNER JOIN banji_course AS bc ON b.id=bc.banji_id 
+		INNER JOIN course AS c ON bc.course_id=c.id 
+		WHERE b.NAME="网络一班";
+</select>
+
+<select id="findAll" resultType="Banji">
+select id,name from banji
+</select>
+<select id="getTotalCountByCondition" parameterType="BanjiSearchCondition" resultType="int">
+        select count(*)
+        from banji
+        <where>
+        <if test="name != null and name != '' ">
+        and name like "%${name}%"
+        </if>
+        </where>
+</select>
+<select id="findPageBeanListByCondition" resultType="Banji">
+       select <include refid="banjiColums"/>
+       from banji
+       <where>
+       <if test="condition.name != null and condition.name != '' ">
+       and name like "%${condition.name}%"
+       </if>
+       </where> 
+       limit #{offset},#{condition.pageSize}
+</select>
+	
+	
+</mapper>

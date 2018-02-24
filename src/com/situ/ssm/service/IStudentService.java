@@ -20,4 +20,8 @@ public interface IStudentService {
 
 	int deleteById(Integer id);
 
+	int deleteAll(int[] checkedIds);
+
+	void update(Student student);
+
 }

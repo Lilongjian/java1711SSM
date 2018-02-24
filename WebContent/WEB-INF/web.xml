@@ -10,16 +10,13 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+  
   <!-- 配置spring -->
   <context-param>
          <param-name>contextConfigLocation</param-name>
          <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
   
-   <!-- 配置监听器，记录登录用户列表 -->
-   <listener>
-         <listener-class>com.situ.ssm.listener.OnLineUserListener</listener-class>
-  </listener>
   <!-- 配置监听器，加载spring -->
   <listener>
          <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -55,4 +52,24 @@
          <servlet-name>springmvc</servlet-name>
          <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+          <servlet-name>check</servlet-name>
+          <servlet-class>com.situ.ssm.controller.CheckImgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+          <servlet-name>check</servlet-name>
+          <url-pattern>/checkImg</url-pattern>
+    </servlet-mapping>
+     <!-- 配置监听器，记录登录用户列表 -->
+  <listener>
+         <listener-class>com.situ.ssm.listener.OnLineUserListener</listener-class>
+  </listener>
+   <!-- 配置监听器，默认超过30分钟和页面没有任何交互，再次操作时，需要重新登录 -->
+   <session-config>
+    <session-timeout>1</session-timeout>
+  </session-config>
+  <listener>
+         <listener-class>com.situ.ssm.listener.MyHttpSessionListener</listener-class>
+  </listener>
+    
 </web-app>

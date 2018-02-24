@@ -1,5 +1,7 @@
 package com.situ.ssm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,7 @@ public class StudentController {
     	System.out.println(student);
     	int count = studentService.add(student);
     	ModelAndView modelAndView = new ModelAndView();
-    	//modelAndView.setViewName("redirect:/student/");
+    	modelAndView.setViewName("redirect:/student/searchByCondition");
     	return modelAndView;
     }
     
@@ -82,6 +84,38 @@ public class StudentController {
     	return "student_list";
     	
     }
+    //批量删除
+    @RequestMapping(value="/deleteAll")
+    public ModelAndView delete(int[] checkedIds){
+    	System.out.println(Arrays.toString(checkedIds));
+    	int count = studentService.deleteAll(checkedIds);
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.setViewName("redirect:/student/searchByCondition");
+    	return modelAndView;
+    }
+    //通过id删除学生
+	@RequestMapping(value="/delete")
+	public String deleteById(int id,Model model){
+		System.out.println(id);
+		System.out.println("瘪犊子" + id);
+		studentService.deleteById(id);
+		return "redirect:/student/searchByCondition";
+	}
+	//修改学生信息（1）
+		@RequestMapping(value="/toUpdate")
+		public String toupdate(int id,Model model){
+			System.out.println(id);
+			Student student = studentService.findById(id);
+			model.addAttribute("student", student);
+			return "student_edit";
+		}
+		//修改学生信息（2）
+		@RequestMapping(value="/update")
+		public String Update(Student student) throws UnsupportedEncodingException{
+			System.out.println(student);
+			studentService.update(student);
+			return "redirect:/student/searchByCondition.action";
+		}
     
     
     

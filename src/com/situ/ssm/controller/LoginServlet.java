@@ -3,6 +3,7 @@ package com.situ.ssm.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,20 +28,20 @@ public class LoginServlet extends HttpServlet{
 	public void getLoginPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		request.getRequestDispatcher("/WEB-INF/jsp/user_login.jsp").forward(request, response);
 	}
-	
+	@RequestMapping(value="/getOnLinePage")
 	public void getOnLinePage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		request.getRequestDispatcher("/WEB-INF/jsp/online_user_list.jsp").forward(request, response);
 	}
 	@RequestMapping(value="/signIn")
 	public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		  /* String checkCode = req.getParameter("checkCode");
+		    String checkCode = req.getParameter("checkCode");
 		   String checkCodeSession = (String) req.getSession().getAttribute("checkCodeSession");
 		   if (checkCode == null 
 				   || "".equals(checkCode)
 				   || !checkCode.equalsIgnoreCase(checkCodeSession)) {
 			   resp.sendRedirect(req.getContextPath() + "/student?method=pageList");
 			   return;
-		   }*/
+		   }
 		String name = req.getParameter("name");
 		String password = req.getParameter("password");
 		User user = userService.login(name, password);
@@ -48,9 +49,8 @@ public class LoginServlet extends HttpServlet{
 		if (user != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", user);
-			/*List<User> list =(List<User>) getServletContext().getAttribute("onLineUserList");
+			List<User> list = (List<User>) req.getServletContext().getAttribute("onLineUserList");
 			list.add(user);
-			System.out.println("用户在线列表" + list);*/
 			resp.sendRedirect(req.getContextPath() + "/student/searchByCondition.action");
 			return;
 		}else {
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		User user  = (User) session.getAttribute("user");
 		session.removeAttribute("user");
-		List<User> list = (List<User>) getServletContext().getAttribute("onLineUserList");
+		List<User> list = (List<User>) req.getServletContext().getAttribute("onLineUserList");
 		list.remove(user);
 		resp.sendRedirect(req.getContextPath() + "/login/getLoginPage.action");
 	}

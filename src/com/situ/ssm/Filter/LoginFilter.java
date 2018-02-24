@@ -33,11 +33,10 @@ public class LoginFilter implements HandlerInterceptor{
 		   if (lastIndex != -1) {
 			extension = servletPath.substring(lastIndex);
 			System.out.println("截取的" + extension);}
-		   if ("/login".equals(servletPath)
+		   if ("/login/signIn".equals(servletPath)
 				   || "/checkImg".equalsIgnoreCase(servletPath)
 				   || ".js".equalsIgnoreCase(extension)
-				   || ".css".equalsIgnoreCase(extension)
-				   || ".action".equals(extension)) {
+				   || ".css".equalsIgnoreCase(extension)){
 			       
 				return true;
 			}else{

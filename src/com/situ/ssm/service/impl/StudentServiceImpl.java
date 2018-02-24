@@ -63,4 +63,17 @@ public class StudentServiceImpl implements IStudentService{
 		return studentDao.deleteById(id);
 	}
 
+
+	@Override
+	public int deleteAll(int[] checkedIds) {
+		return studentDao.deleteAll(checkedIds);
+	}
+
+
+	@Override
+	public void update(Student student) {
+		studentDao.update(student);
+		
+	}
+
 }

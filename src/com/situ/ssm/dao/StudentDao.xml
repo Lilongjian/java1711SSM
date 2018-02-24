@@ -80,4 +80,31 @@
           </where>
           limit ${(pageNo-1)*pageSize},${pageSize}
           </select>
+          <delete id="deleteAll">
+          delete from student 
+         <where>
+          id in 
+          <foreach collection="array" item="id" open="(" close=")" separator="," >
+				#{id}
+		</foreach>
+		</where>
+         </delete>
+         <update id="update" parameterType="student">
+         update student 
+         <set>
+         <if test="name != null and name != '' ">
+         name=#{name},
+         </if>
+         <if test="age != null and age != '' ">
+         age=#{age},
+         </if>
+         <if test="gender != null and gender != '' ">
+         gender=#{gender},
+         </if>
+         <if test="address != null and address != '' ">
+         address=#{address},
+         </if>
+         </set>
+         where id=#{id}
+         </update>
   </mapper>

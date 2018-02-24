@@ -29,9 +29,9 @@
 	<!-- 配置拦截器,可以配置多个拦截器-->
     <mvc:interceptors>
     <mvc:interceptor>
-        <!-- /*只能拦截一层的请求， /**可以拦截多层的请求 -->
+      <!--   /*只能拦截一层的请求， /**可以拦截多层的请求 -->
         <mvc:mapping path="/**"/>
         <bean class="com.situ.ssm.Filter.LoginFilter"/>
     </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors> 
 </beans>

@@ -1,3 +1,4 @@
+
 package com.situ.ssm.dao;
 
 import java.util.List;
@@ -23,5 +24,9 @@ public interface StudentDao {
     
 	List<Student> findPageBeanListByCondition(StudentSearchCondition condition);
 	int deleteById(Integer id);
+
+	int deleteAll(int[] checkedIds);
+
+	void update(Student student);
 
 }

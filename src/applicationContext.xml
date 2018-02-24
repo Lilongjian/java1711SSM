@@ -19,7 +19,6 @@
 	
 	<!-- 配置扫描Service -->
 	<context:component-scan base-package="com.situ.ssm.service"/>
-	
 	<!-- ****************************************** -->
 	<!-- 数据库相关配置 -->
 	<!-- 配置数据源 -->
